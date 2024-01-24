@@ -1,9 +1,21 @@
 #!/usr/bin/env python3
 """module for redis tasks in python"""
 
+from functools import wraps
 from typing import Callable, Union
 from uuid import uuid4
 import redis
+
+
+def count_calls(method: Callable) -> Callable:
+    """count how many times methods of the Cache class are called"""
+
+    @wraps(method)
+    def invoker(self, *args, **kwargs):
+        self._redis.incr(method.__qualname__)
+        return method
+
+    return invoker
 
 
 class Cache:
@@ -14,6 +26,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores data passed in redis data storage and return the key"""
         key = str(uuid4())
