@@ -18,4 +18,4 @@ if __name__ == "__main__":
         no_method_req = nginx_collection.count_documents({"method": method})
         print(f"\tmethod {method}: {no_method_req}")
 
-    print(f"{st_ch} status check")
+    print(f"{st} status check")
