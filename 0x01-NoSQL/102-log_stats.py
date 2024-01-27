@@ -29,4 +29,4 @@ if __name__ == "__main__":
     )
 
     for ip in ips:
-        print(f"{ip['_id']}: {ip['totalRequests']}")
+        print(f"\t{ip['_id']}: {ip['totalRequests']}")
