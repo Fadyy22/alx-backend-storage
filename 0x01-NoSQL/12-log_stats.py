@@ -9,8 +9,6 @@ if __name__ == "__main__":
 
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
 
-    st = nginx_collection.count_documents({"method": "GET", "path": "/status"})
-
     print(f"{nginx_collection.count_documents({})} logs")
     print("Methods:")
 
@@ -18,4 +16,5 @@ if __name__ == "__main__":
         req_count = nginx_collection.count_documents({"method": method})
         print(f"\tmethod {method}: {req_count}")
 
+    st = nginx_collection.count_documents({"method": "GET", "path": "/status"})
     print(f"{st} status check")
